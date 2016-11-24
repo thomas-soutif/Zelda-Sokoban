@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     SDL_Color couleurRouge = {237,28,36};
     SDL_Color couleurBlanche = {255,255,255};
 
-     FMOD_BOOL etat;
+    FMOD_BOOL etat;
     FMOD_SYSTEM *system;
     FMOD_SOUND *clic = NULL;
     FMOD_SOUND *sound = NULL;
@@ -51,16 +51,16 @@ int main(int argc, char *argv[])
     FMOD_System_PlaySound(system,sound,NULL, 0, &canal_mus); // Lecture musique
     FMOD_Sound_SetLoopCount(sound, -1); // repetition de la musique
 
-     FMOD_Channel_SetPaused(canal_mus, 1); // Met en pause le canal
+    FMOD_Channel_SetPaused(canal_mus, 1); // Met en pause le canal
     FMOD_Channel_SetVolume(canal_mus, 0.5); // Change le volume du canal
     FMOD_Channel_SetPaused(canal_mus, 0); // Remet en route le canal
 
 
-     imgJouer = TTF_RenderText_Blended(police, "1  : Jouer (Mode Histoire)", couleurNoire);
+    imgJouer = TTF_RenderText_Blended(police, "1  : Jouer (Mode Histoire)", couleurNoire);
     imgNiveau = TTF_RenderText_Blended(police, "2 : Jouer Niveau libre", couleurNoire);
     imgEditer = TTF_RenderText_Blended(police, "3 : Editer Niveau",couleurNoire);
 
-     imgJouerRouge = TTF_RenderText_Blended(police, "1  : Jouer (Mode Histoire)", couleurRouge);
+    imgJouerRouge = TTF_RenderText_Blended(police, "1  : Jouer (Mode Histoire)", couleurRouge);
     imgNiveauRouge = TTF_RenderText_Blended(police, "2 : Jouer Niveau libre", couleurRouge);
     imgEditerRouge = TTF_RenderText_Blended(police, "3 : Editer Niveau",couleurRouge);
 
@@ -87,13 +87,13 @@ int main(int argc, char *argv[])
     fleche = IMG_Load("DATA/fleche.png");
     Objectif = IMG_Load("DATA/objectif.png");
     caisse = IMG_Load("DATA/caisse.png");
-SDL_SetColorKey(imgQuitter, SDL_SRCCOLORKEY, SDL_MapRGB(imgQuitter->format, 0, 0, 0));
-SDL_SetColorKey(imgQuitter1, SDL_SRCCOLORKEY, SDL_MapRGB(imgQuitter1->format, 0, 0, 0));
+    SDL_SetColorKey(imgQuitter, SDL_SRCCOLORKEY, SDL_MapRGB(imgQuitter->format, 0, 0, 0));
+    SDL_SetColorKey(imgQuitter1, SDL_SRCCOLORKEY, SDL_MapRGB(imgQuitter1->format, 0, 0, 0));
 
-SDL_SetColorKey(zelda_bas, SDL_SRCCOLORKEY, SDL_MapRGB(zelda_bas->format, 255, 255, 255));
-SDL_SetColorKey(zelda_droite, SDL_SRCCOLORKEY, SDL_MapRGB(zelda_droite->format, 255, 255, 255));
-SDL_SetColorKey(fleche, SDL_SRCCOLORKEY, SDL_MapRGB(fleche->format, 19, 206, 92));
-SDL_SetColorKey(Objectif, SDL_SRCCOLORKEY, SDL_MapRGB(Objectif->format, 19, 206, 92));
+    SDL_SetColorKey(zelda_bas, SDL_SRCCOLORKEY, SDL_MapRGB(zelda_bas->format, 255, 255, 255));
+    SDL_SetColorKey(zelda_droite, SDL_SRCCOLORKEY, SDL_MapRGB(zelda_droite->format, 255, 255, 255));
+    SDL_SetColorKey(fleche, SDL_SRCCOLORKEY, SDL_MapRGB(fleche->format, 19, 206, 92));
+    SDL_SetColorKey(Objectif, SDL_SRCCOLORKEY, SDL_MapRGB(Objectif->format, 19, 206, 92));
     imgFond = IMG_Load("DATA/fond.png");
     positionMenu.x = (Longueur/2) - (Largeur/2);
     positionMenu.y = 0;
@@ -141,161 +141,222 @@ debut:
 
 
 
-while(continuer)
-{
+    while(continuer)
+    {
 
 
-SDL_WaitEvent(&event);
+        SDL_WaitEvent(&event);
         switch(event.type)
         {
 
-            case SDL_QUIT:
-                continuer = 0;
-                break;
+        case SDL_QUIT:
+            continuer = 0;
+            break;
 
-            case SDL_MOUSEMOTION:
-                if (event.button.y > 197 && event.button.y < 225 && event.button.x > 73 && event.button.x < 345) {   menu1 = 1;}
-                else if (event.button.y > 236 && event.button.y < 260 && event.button.x > 74 && event.button.x < 305 ) { menu2 = 1; }
-                else if (event.button.y > 271 && event.button.y < 291 && event.button.x > 74 && event.button.x < 259 ) {menu3 = 1;}
-                else {
+        case SDL_MOUSEMOTION:
+            if (event.button.y > 197 && event.button.y < 225 && event.button.x > 73 && event.button.x < 345)
+            {
+                menu1 = 1;
+            }
+            else if (event.button.y > 236 && event.button.y < 260 && event.button.x > 74 && event.button.x < 305 )
+            {
+                menu2 = 1;
+            }
+            else if (event.button.y > 271 && event.button.y < 291 && event.button.x > 74 && event.button.x < 259 )
+            {
+                menu3 = 1;
+            }
+            else
+            {
 
-                    menu1 = 0;
-                    menu2 = 0;
-                    menu3 = 0;
+                menu1 = 0;
+                menu2 = 0;
+                menu3 = 0;
 
-                }
+            }
 
 
-                if((event.motion.y > positionQuitter.y +10 && event.motion.y < positionQuitter.y + 25) && (event.motion.x > positionQuitter.x + 15 && event.motion.x < positionQuitter.x + 65) ) { quitter1 = 1;}
-                else {quitter1 = 0;}
-                if(event.motion.y > 326 && event.motion.y < 357 && event.motion.x > 86 && event.motion.x < 120) {menuspe = 1; }
-                else { menuspe = 0;}
-                break;
-            case SDL_MOUSEBUTTONDOWN:
+            if((event.motion.y > positionQuitter.y +10 && event.motion.y < positionQuitter.y + 25) && (event.motion.x > positionQuitter.x + 15 && event.motion.x < positionQuitter.x + 65) )
+            {
+                quitter1 = 1;
+            }
+            else
+            {
+                quitter1 = 0;
+            }
+            if(event.motion.y > 326 && event.motion.y < 357 && event.motion.x > 86 && event.motion.x < 120)
+            {
+                menuspe = 1;
+            }
+            else
+            {
+                menuspe = 0;
+            }
+            break;
+        case SDL_MOUSEBUTTONDOWN:
 
-                switch (event.button.button)
+            switch (event.button.button)
+            {
+            case SDL_BUTTON_LEFT:
+
+                if(event.button.y > 197 && event.button.y < 225 && event.button.x > 73 && event.button.x < 345)
                 {
-                    case SDL_BUTTON_LEFT:
-
-                    if(event.button.y > 197 && event.button.y < 225 && event.button.x > 73 && event.button.x < 345) {  FMOD_System_PlaySound(system,clic,NULL, 0, NULL); continuer = partieJeu(ecran,0);}
-                    if(event.button.y >236 && event.button.y < 260 && event.button.x > 73 && event.button.x < 305) {  FMOD_System_PlaySound(system,clic,NULL, 0, NULL); continuer = niveau(ecran);}
-                    if (event.button.y > 271 && event.button.y < 291 && event.button.x > 73 && event.button.x < 259 ) {  FMOD_System_PlaySound(system,clic,NULL, 0, NULL); continuer = edit(ecran);}
-                    if((event.button.y > positionQuitter.y +10 && event.button.y < positionQuitter.y + 25) && (event.button.x > positionQuitter.x + 15 && event.button.x < positionQuitter.x + 65) ){continuer = 0;}
+                    FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
+                    continuer = partieJeu(ecran,0);
+                }
+                if(event.button.y >236 && event.button.y < 260 && event.button.x > 73 && event.button.x < 305)
+                {
+                    FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
+                    continuer = niveau(ecran);
+                }
+                if (event.button.y > 271 && event.button.y < 291 && event.button.x > 73 && event.button.x < 259 )
+                {
+                    FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
+                    continuer = edit(ecran);
+                }
+                if((event.button.y > positionQuitter.y +10 && event.button.y < positionQuitter.y + 25) && (event.button.x > positionQuitter.x + 15 && event.button.x < positionQuitter.x + 65) )
+                {
+                    continuer = 0;
+                }
                 break;
             }
 
+            break;
+
+
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym)
+            {
+
+            case SDLK_ESCAPE:
+
                 break;
 
+            case SDLK_1:
+                continuer = partieJeu(ecran,0);
+                break;
+            case SDLK_KP1:
+                continuer = partieJeu(ecran,0);
+                break;
+            case SDLK_2:
+                continuer = niveau(ecran);
+                break;
+            case SDLK_KP2:
+                continuer = niveau(ecran);
+                break;
+            case SDLK_3:
+                continuer = edit(ecran);
+                break;
+            case SDLK_KP3:
+                continuer = edit(ecran);
+                break;
+            case SDLK_p:
 
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym)
-                {
+                FMOD_Channel_GetPaused(canal_mus, &etat);
 
-                case SDLK_ESCAPE:
-
-                    break;
-
-                case SDLK_1:
-                   continuer = partieJeu(ecran,0);
-                    break;
-                case SDLK_KP1:
-                   continuer = partieJeu(ecran,0);
-                    break;
-                case SDLK_2:
-                    continuer = niveau(ecran);
-                    break;
-                case SDLK_KP2:
-                    continuer = niveau(ecran);
-                    break;
-                case SDLK_3:
-                    continuer = edit(ecran);
-                    break;
-                case SDLK_KP3:
-                    continuer = edit(ecran);
-                    break;
-                case SDLK_p:
-
-                    FMOD_Channel_GetPaused(canal_mus, &etat);
-
-        if (etat == 1) // Si la chanson est en pause
-            FMOD_Channel_SetPaused(canal_mus, 0); // On enlève la pause
-        else // Sinon, elle est en cours de lecture
-            FMOD_Channel_SetPaused(canal_mus, 1); // On met en pause
+                if (etat == 1) // Si la chanson est en pause
+                    FMOD_Channel_SetPaused(canal_mus, 0); // On enlève la pause
+                else // Sinon, elle est en cours de lecture
+                    FMOD_Channel_SetPaused(canal_mus, 1); // On met en pause
 
 
 
-                }
+            }
             break;
         }
 
-SDL_BlitSurface(imgFond,NULL,ecran, &positionFond);
-SDL_BlitSurface(texteTitre,NULL,ecran,&posTitre);
-SDL_BlitSurface(mur,NULL,ecran,&posMur1);
-SDL_BlitSurface(mur,NULL,ecran,&posMur2);
-SDL_BlitSurface(caisse,NULL,ecran,&posCaisse);
-SDL_BlitSurface(zelda_bas,NULL,ecran,&posZelda_bas);
-SDL_BlitSurface(fleche,NULL,ecran,&posFleche);
-SDL_BlitSurface(Objectif,NULL,ecran,&posObjectif);
-if(menuspe == 1) { SDL_BlitSurface(zelda_bas,NULL,ecran,&posZelda_droite);        }
-else {SDL_BlitSurface(zelda_droite,NULL,ecran,&posZelda_droite);}
+        SDL_BlitSurface(imgFond,NULL,ecran, &positionFond);
+        SDL_BlitSurface(texteTitre,NULL,ecran,&posTitre);
+        SDL_BlitSurface(mur,NULL,ecran,&posMur1);
+        SDL_BlitSurface(mur,NULL,ecran,&posMur2);
+        SDL_BlitSurface(caisse,NULL,ecran,&posCaisse);
+        SDL_BlitSurface(zelda_bas,NULL,ecran,&posZelda_bas);
+        SDL_BlitSurface(fleche,NULL,ecran,&posFleche);
+        SDL_BlitSurface(Objectif,NULL,ecran,&posObjectif);
+        if(menuspe == 1)
+        {
+            SDL_BlitSurface(zelda_bas,NULL,ecran,&posZelda_droite);
+        }
+        else
+        {
+            SDL_BlitSurface(zelda_droite,NULL,ecran,&posZelda_droite);
+        }
 
 
-if(menu1 == 1) {      SDL_BlitSurface(imgJouerRouge,NULL,ecran,&positionJouer); }
-else { SDL_BlitSurface(imgJouer,NULL,ecran,&positionJouer);}
+        if(menu1 == 1)
+        {
+            SDL_BlitSurface(imgJouerRouge,NULL,ecran,&positionJouer);
+        }
+        else
+        {
+            SDL_BlitSurface(imgJouer,NULL,ecran,&positionJouer);
+        }
 
-if(menu2 == 1) { SDL_BlitSurface(imgNiveauRouge,NULL,ecran,&positionNiveau);}
-else {SDL_BlitSurface(imgNiveau,NULL,ecran,&positionNiveau);}
+        if(menu2 == 1)
+        {
+            SDL_BlitSurface(imgNiveauRouge,NULL,ecran,&positionNiveau);
+        }
+        else
+        {
+            SDL_BlitSurface(imgNiveau,NULL,ecran,&positionNiveau);
+        }
 
-if(menu3 == 1) {  SDL_BlitSurface(imgEditerRouge,NULL,ecran,&positionEditer);}
-else {SDL_BlitSurface(imgEditer,NULL,ecran,&positionEditer);}
-
-
-if(quitter1 == 1)
-{
-
-
-SDL_BlitSurface(imgQuitter1, NULL, ecran, &positionQuitter);
-}
-else
-{
-    SDL_BlitSurface(imgQuitter, NULL, ecran, &positionQuitter);
-}
-
-SDL_BlitSurface(textePause,NULL,ecran, &posPause);
-
-SDL_Flip(ecran);
+        if(menu3 == 1)
+        {
+            SDL_BlitSurface(imgEditerRouge,NULL,ecran,&positionEditer);
+        }
+        else
+        {
+            SDL_BlitSurface(imgEditer,NULL,ecran,&positionEditer);
+        }
 
 
-}
+        if(quitter1 == 1)
+        {
 
-SDL_FreeSurface(imgFond);
 
-SDL_FreeSurface(imgQuitter);
-SDL_FreeSurface(imgQuitter1);
+            SDL_BlitSurface(imgQuitter1, NULL, ecran, &positionQuitter);
+        }
+        else
+        {
+            SDL_BlitSurface(imgQuitter, NULL, ecran, &positionQuitter);
+        }
 
-SDL_FreeSurface(imgJouer);
-SDL_FreeSurface(imgNiveau);
-SDL_FreeSurface(imgEditer);
-SDL_FreeSurface(imgJouerRouge);
-SDL_FreeSurface(imgNiveauRouge);
-SDL_FreeSurface(imgEditerRouge);
-SDL_FreeSurface(texteTitre);
-SDL_FreeSurface(mur);
-SDL_FreeSurface(Objectif);
-SDL_FreeSurface(caisse);
-SDL_FreeSurface(fleche);
-SDL_FreeSurface(zelda_bas);
-SDL_FreeSurface(zelda_droite);
-SDL_FreeSurface(textePause);
-TTF_CloseFont(police);
-TTF_CloseFont(policeTitre);
-TTF_CloseFont(policePause);
+        SDL_BlitSurface(textePause,NULL,ecran, &posPause);
 
-TTF_Quit();
-FMOD_Sound_Release(clic);
-FMOD_Sound_Release(sound);
-FMOD_System_Close(system);
-FMOD_System_Release(system);
+        SDL_Flip(ecran);
+
+
+    }
+
+    SDL_FreeSurface(imgFond);
+
+    SDL_FreeSurface(imgQuitter);
+    SDL_FreeSurface(imgQuitter1);
+
+    SDL_FreeSurface(imgJouer);
+    SDL_FreeSurface(imgNiveau);
+    SDL_FreeSurface(imgEditer);
+    SDL_FreeSurface(imgJouerRouge);
+    SDL_FreeSurface(imgNiveauRouge);
+    SDL_FreeSurface(imgEditerRouge);
+    SDL_FreeSurface(texteTitre);
+    SDL_FreeSurface(mur);
+    SDL_FreeSurface(Objectif);
+    SDL_FreeSurface(caisse);
+    SDL_FreeSurface(fleche);
+    SDL_FreeSurface(zelda_bas);
+    SDL_FreeSurface(zelda_droite);
+    SDL_FreeSurface(textePause);
+    TTF_CloseFont(police);
+    TTF_CloseFont(policeTitre);
+    TTF_CloseFont(policePause);
+
+    TTF_Quit();
+    FMOD_Sound_Release(clic);
+    FMOD_Sound_Release(sound);
+    FMOD_System_Close(system);
+    FMOD_System_Release(system);
     SDL_Quit();
 
     return EXIT_SUCCESS;

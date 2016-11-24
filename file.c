@@ -4,33 +4,37 @@
 
 int chargerPartie(int niveau[Largeur_Bloc][Longueur_Bloc], int niv)
 {
-char ligneFichier[Longueur_Bloc * Largeur_Bloc + 1] = {0};
-int i = 0, j = 0;
-FILE* fichier = NULL;
-if(niv == -1) {fichier = fopen("niveauxPerso.lvl","r"); fgets(ligneFichier, Longueur_Bloc * Largeur_Bloc +2, fichier); }
-else
-{
-
-
-fichier = fopen("niveaux.lvl","r");
-
-
-
-
-
-for(i = 0; i < niv; i++)
-{
-
-
-fgets(ligneFichier, Longueur_Bloc * Largeur_Bloc +2, fichier);
-}
-}
-for (i = 0 ; i < Longueur_Bloc ; i++)
-{
-    for (j = 0 ; j < Largeur_Bloc ; j++)
+    char ligneFichier[Longueur_Bloc * Largeur_Bloc + 1] = {0};
+    int i = 0, j = 0;
+    FILE* fichier = NULL;
+    if(niv == -1)
     {
-        switch (ligneFichier[(i * Longueur_Bloc) + j])
+        fichier = fopen("niveauxPerso.lvl","r");
+        fgets(ligneFichier, Longueur_Bloc * Largeur_Bloc +2, fichier);
+    }
+    else
+    {
+
+
+        fichier = fopen("niveaux.lvl","r");
+
+
+
+
+
+        for(i = 0; i < niv; i++)
         {
+
+
+            fgets(ligneFichier, Longueur_Bloc * Largeur_Bloc +2, fichier);
+        }
+    }
+    for (i = 0 ; i < Longueur_Bloc ; i++)
+    {
+        for (j = 0 ; j < Largeur_Bloc ; j++)
+        {
+            switch (ligneFichier[(i * Longueur_Bloc) + j])
+            {
             case '0':
                 niveau[j][i] = 0;
                 break;
@@ -52,39 +56,39 @@ for (i = 0 ; i < Longueur_Bloc ; i++)
             case '6':
                 niveau[j][i] = 6;
                 break;
+            }
         }
     }
-}
 
 
 
-fclose(fichier);
-return 1;
+    fclose(fichier);
+    return 1;
 
 }
 
 void creerPartie(int carte[Longueur_Bloc][Largeur_Bloc])
 
 {
-FILE* fichier = NULL;
+    FILE* fichier = NULL;
 
 
 
 
 
-fichier = fopen("niveauxPerso.lvl","w+");
-int longueur = Longueur_Bloc * Largeur_Bloc;
-int i = 0;
-int j = 0;
-int objetActuel = VIDE;
+    fichier = fopen("niveauxPerso.lvl","w+");
+    int longueur = Longueur_Bloc * Largeur_Bloc;
+    int i = 0;
+    int j = 0;
+    int objetActuel = VIDE;
 
- for (j = 0 ; j < Largeur_Bloc; j++)
-{
-    for (i = 0 ; i < Longueur_Bloc; i++)
+    for (j = 0 ; j < Largeur_Bloc; j++)
     {
-
-    switch(carte[i][j])
+        for (i = 0 ; i < Longueur_Bloc; i++)
         {
+
+            switch(carte[i][j])
+            {
             case VIDE:
                 objetActuel = 0;
                 break;
@@ -92,41 +96,42 @@ int objetActuel = VIDE;
                 objetActuel = 1;
                 break;
             case CAISSE:
-                 objetActuel = 2;
+                objetActuel = 2;
                 break;
             case OBJECTIF:
-                 objetActuel = 3;
+                objetActuel = 3;
                 break;
             case ZELDA:
-                 objetActuel = 4;
+                objetActuel = 4;
                 break;
             case CAISSE_OK:
-                 objetActuel = 5;
-                 break;
+                objetActuel = 5;
+                break;
             case PORTE:
                 objetActuel = 6;
                 break;
+            }
+
+            fprintf(fichier,"%d",objetActuel);
+
+
+
         }
 
-        fprintf(fichier,"%d",objetActuel);
+
+
+    }
+
+    fclose(fichier);
 
 
 
 }
 
+void rename_fichier()
+{
 
-
-}
-
-fclose(fichier);
-
-
-
-}
-
-void rename_fichier(){
-
-rename("niveauPerso.lvl", "niveauPerso1.lvl");
+    rename("niveauPerso.lvl", "niveauPerso1.lvl");
 
 
 
