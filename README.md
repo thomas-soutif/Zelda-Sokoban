@@ -10,5 +10,5 @@ To build Zelda-Sokoban, run
 `make`
 
 To execute the compiled binary, run
-`zelsok`
+`./zelsok`
 
