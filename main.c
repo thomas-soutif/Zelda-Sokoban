@@ -4,10 +4,14 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
-#include <FMOD/fmod.h>
+//#include <FMOD/fmod.h>
 #include "jeu.h"
 #include "editeur.h"
 #include "constantes.h"
+
+/*
+ * TODO: Find a replacement for FMOD
+ */
 
 // 1200 lignes pour tout le jeu
 int main(int argc, char *argv[])
@@ -36,7 +40,7 @@ int main(int argc, char *argv[])
     SDL_Color couleurNoire = {0, 0, 0};
     SDL_Color couleurRouge = {237,28,36};
     SDL_Color couleurBlanche = {255,255,255};
-
+    /*
     FMOD_BOOL etat;
     FMOD_SYSTEM *system;
     FMOD_SOUND *clic = NULL;
@@ -54,8 +58,7 @@ int main(int argc, char *argv[])
     FMOD_Channel_SetPaused(canal_mus, 1); // Met en pause le canal
     FMOD_Channel_SetVolume(canal_mus, 0.5); // Change le volume du canal
     FMOD_Channel_SetPaused(canal_mus, 0); // Remet en route le canal
-
-
+    */
     imgJouer = TTF_RenderText_Blended(police, "1  : Jouer (Mode Histoire)", couleurNoire);
     imgNiveau = TTF_RenderText_Blended(police, "2 : Jouer Niveau libre", couleurNoire);
     imgEditer = TTF_RenderText_Blended(police, "3 : Editer Niveau",couleurNoire);
@@ -201,17 +204,17 @@ debut:
 
                 if(event.button.y > 197 && event.button.y < 225 && event.button.x > 73 && event.button.x < 345)
                 {
-                    FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
+                    //FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
                     continuer = partieJeu(ecran,0);
                 }
                 if(event.button.y >236 && event.button.y < 260 && event.button.x > 73 && event.button.x < 305)
                 {
-                    FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
+                    //FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
                     continuer = niveau(ecran);
                 }
                 if (event.button.y > 271 && event.button.y < 291 && event.button.x > 73 && event.button.x < 259 )
                 {
-                    FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
+                    //FMOD_System_PlaySound(system,clic,NULL, 0, NULL);
                     continuer = edit(ecran);
                 }
                 if((event.button.y > positionQuitter.y +10 && event.button.y < positionQuitter.y + 25) && (event.button.x > positionQuitter.x + 15 && event.button.x < positionQuitter.x + 65) )
@@ -250,6 +253,7 @@ debut:
             case SDLK_KP3:
                 continuer = edit(ecran);
                 break;
+                /*
             case SDLK_p:
 
                 FMOD_Channel_GetPaused(canal_mus, &etat);
@@ -258,7 +262,7 @@ debut:
                     FMOD_Channel_SetPaused(canal_mus, 0); // On enlève la pause
                 else // Sinon, elle est en cours de lecture
                     FMOD_Channel_SetPaused(canal_mus, 1); // On met en pause
-
+                */
 
 
             }
@@ -353,11 +357,13 @@ debut:
     TTF_CloseFont(policePause);
 
     TTF_Quit();
+    /*
     FMOD_Sound_Release(clic);
     FMOD_Sound_Release(sound);
     FMOD_System_Close(system);
     FMOD_System_Release(system);
     SDL_Quit();
+    */
 
     return EXIT_SUCCESS;
 
