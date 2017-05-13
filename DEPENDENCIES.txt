@@ -1,0 +1,10 @@
+fmod.dll
+fmodex.dll
+jpeg.dll
+libfreetype-6.dll
+libpng12-0.dll
+libtiff-3.dll
+SDL.dll
+SDL_image.dll
+SDL_ttf.dll
+zlib1.dll

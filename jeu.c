@@ -30,9 +30,9 @@ int partieJeu(SDL_Surface* ecran, int niveau)
     TTF_Font *policeCompteur = NULL;
 
     policeTexte = TTF_OpenFont("font.ttf",10);
-    policePerdue = TTF_OpenFont("NEIGE.ttf",50);
+    policePerdue = TTF_OpenFont("NEIGE.TTF",50);
     policeAuteur = TTF_OpenFont("font.ttf",10);
-    policeCompteur = TTF_OpenFont("NEIGE.ttf",15);
+    policeCompteur = TTF_OpenFont("NEIGE.TTF",15);
     SDL_Color couleurNoire = {0, 0, 0};
     SDL_Color couleurRouge = {237,28,36};
     SDL_Color Cyan = {0, 163, 232};
